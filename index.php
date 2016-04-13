@@ -1,6 +1,6 @@
 <html>
 <head>
-<script type="text/javascript" src="jsFunctions.js"></script>
+<script type="text/javascript" src="client/jsFunctions.js"></script>
 </head>
 <body>
 
