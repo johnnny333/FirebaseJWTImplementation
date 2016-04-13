@@ -3,3 +3,4 @@ exampleJWT.php
 README.md
 server/keys/*.pem
 vendor/*
+*~
