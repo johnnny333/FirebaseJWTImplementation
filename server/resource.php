@@ -7,7 +7,7 @@ use \Firebase\JWT\JWT;
 $jwt = $_POST ['jwt'];
 
 /**
- * Encode JWT token to readable payload
+ * Send base64 resource if token is valid, otherwise send error msg
  * @param string $jwt
  * @return void
  */
@@ -26,9 +26,8 @@ function JWTencode($jwt) {
 		//Print error msg and break out of script
 		return false;
 	}
-		
-	print_r ( base64_encode(file_get_contents(RESOURCES."/malamuty.jpg")));
 	
+	print_r ( base64_encode(file_get_contents(RESOURCES."/malamuty.jpg")));
 }
 
 JWTencode ( $jwt );
