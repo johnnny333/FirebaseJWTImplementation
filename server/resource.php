@@ -6,6 +6,11 @@ use \Firebase\JWT\JWT;
 
 $jwt = $_POST ['jwt'];
 
+/**
+ * Encode JWT token to readable payload
+ * @param string $jwt
+ * @return void
+ */
 function JWTencode($jwt) {
 	$pubKey = file_get_contents ( KEYS.'/pubkey.pem' );
 	
@@ -23,7 +28,6 @@ function JWTencode($jwt) {
 	}
 		
 	print_r ( base64_encode(file_get_contents(RESOURCES."/malamuty.jpg")));
-// 	print_r ( base64_encode('hello'));
 	
 }
 
