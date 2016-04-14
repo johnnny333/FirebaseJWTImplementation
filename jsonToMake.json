@@ -1,0 +1,13 @@
+{
+	"widget": {
+		"encoded": {
+			"jwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJpc3N1ZXIiLCJhdWQiOiJhdWRpdG9yaXVtIiwiaWF0IjoxNDYwNjUyNDk0LCJleHAiOjE0NjA2NTI1NTR9.EVwYaiTz1kohWE6HT5VUTY8DSLWXHx0uznDv7_2pYcCQ48eGzNVD5BYoRk5uNChZ5ubVL_gW2z0Sq8RMz1jkuWLWZNxzAE4yVofPbT7m-hKueItnal_XqaQnfy_kzkqQoxHy0rJmuzfabG_DQSWue0-6nKWBGREUsGJi3IXjmQMuNSF_KOmqs5BAWYtXiG5fpOCMUl2ba31WNPgdTV47_sUJFLFFpJNyJyQbiW4erfBFbUNJ73XMDfCxwPP2DMRp0n_O0CL84CMAkzmGhLANWf8y5HmTCXQ1R7W51_dwe8qrKlu2mIXRS5GsUcRZnKb_6ONBkn1HseYJL97cwgts6w"
+		},
+		"decoded": {
+			"iss": "issuer",
+			"aud": "auditorium",
+			"iat": 1460652494,
+			"exp": 1460652554
+		}
+	}
+}
