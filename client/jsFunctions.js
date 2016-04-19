@@ -1,5 +1,7 @@
 // create single HTML elements and use them within showImage()
-var img = document.createElement("img"), span = document.createElement("span");
+var img = document.createElement("img"), 
+	span = document.createElement("span"),
+	timerSpan = document.createElement("span");
 
 /**
  * Prepare variables for ajaxRequest()
@@ -10,26 +12,24 @@ var img = document.createElement("img"), span = document.createElement("span");
  */
 function prepareRequest(requestType) {
 
-	// get jwt token from local storage
-	var jwt = localStorage.getItem("jwt");
-
 	switch (requestType) {
 
 	case 'jwtRequest':
 
-		var iss = document.getElementsByName("issuer")[0].value.trim(), aud = document
-				.getElementsByName("auditorium")[0].value.trim(), exp = document
-				.getElementsByName("exp")[0].value,
-
+		var iss = document.getElementsByName("issuer")[0].value.trim(), 
+			aud = document.getElementsByName("auditorium")[0].value.trim(), 
+			exp = document.getElementsByName("exp")[0].value.trim(),
+			res = document.getElementsByName("resource")[0].value.trim(),
+			
 		script = 'server/jwtRequest.php', 
-		vars = "iss=" + iss + "&aud=" + aud + "&exp=" + exp;
-
+		vars = "iss=" + iss + "&aud=" + aud + "&exp=" + exp + "&res=" + res;
+		
 		break;
 
 	case 'resource':
 
 		var script = 'server/resource.php',  
-		vars = "jwt=" + jwt;
+		vars = "jwt=" + localStorage.getItem("jwt");
 
 		break;
 
@@ -58,9 +58,8 @@ function ajaxRequest(script, vars) {
 			if (checkForErrorInResponse(hr.responseText) == false) {
 				return false
 			}
-
 			if (script == 'server/jwtRequest.php') {
-
+				
 				var responseJSON = JSON.parse(hr.responseText);
 
 				// Save encoded token to the local storage
@@ -70,11 +69,9 @@ function ajaxRequest(script, vars) {
 				 timer(responseJSON.decoded['exp']);
 
 				// Put encoded JWT to the appropriate div
-				document.getElementsByTagName('div')[0].innerHTML = responseJSON.encoded['jwt'];
-				// Put decoded JWT to the apropriate div
-				document.getElementsByTagName('div')[1].innerHTML = JSON
-						.stringify(responseJSON.decoded);
-
+				document.getElementsByTagName('textarea')[0].innerHTML = responseJSON.encoded['jwt'];
+				// Put decoded JWT to the apropriate div and format in nicely
+				document.getElementsByTagName('textarea')[1].innerHTML = JSON.stringify(responseJSON.decoded, undefined, 4);
 			}
 			// Resource: Incoming base64 is handed to showImage()
 			if (script == 'server/resource.php') {
@@ -100,17 +97,21 @@ function showImage(resource) {
  * @param number expTime
  */
 function timer(expTime) {
+	
+	console.log("timerSpan " + timerSpan);
+	console.log("timerSpan " + typeof timerSpan)
 
-	var timer = setInterval(function() {
+	var timerInterval = setInterval(function() {
 		var currentTime = new Date().getTime() / 1000;
-		console.log((expTime - currentTime).toFixed()) // changes type from
-														// number to string :/
+//		console.log((expTime - currentTime).toFixed()) // changes type from number to string :/
+		timerSpan.innerHTML = (expTime - currentTime).toFixed();
+		document.body.appendChild(timerSpan);
 
 		// Stop the timer when 0 is reached
 		if ((expTime - currentTime).toFixed() <= 0) {
-			clearInterval(timer)
+			clearInterval(timerInterval)
+			timerSpan.parentNode.removeChild(timerSpan);
 		}
-
 	}, 1000);
 }
 /**

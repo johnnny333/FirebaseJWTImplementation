@@ -7,7 +7,7 @@ use \Firebase\JWT\JWT;
 $iss = $_POST ['iss'];
 $aud = $_POST ['aud'];
 $exp = $_POST ['exp'];
-
+$res = $_POST ['res']; 
 /**
  * Encode JWT token with given parameters from POST
  *
@@ -16,7 +16,7 @@ $exp = $_POST ['exp'];
  * @param number $exp        	
  * @return void
  */
-function JWTencode($iss, $aud, $exp = 5) {
+function JWTencode($iss, $aud, $exp = 5, $res) {
 	
 	// RS256 ASSYMETRIC
 	// private key
@@ -32,7 +32,8 @@ function JWTencode($iss, $aud, $exp = 5) {
 			"iss" => $iss,
 			"aud" => $aud,
 			"iat" => time (),
-			"exp" => time () + (60 * $exp) 
+			"exp" => time () + (60 * $exp),
+			"res" => $res
 	);
 	
 	/**
@@ -63,6 +64,6 @@ function JWTencode($iss, $aud, $exp = 5) {
 	echo "}";
 }
 
-JWTencode ( $iss, $aud, $exp );
+JWTencode ( $iss, $aud, $exp, $res );
 
 ?>

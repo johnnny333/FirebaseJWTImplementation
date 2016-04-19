@@ -16,9 +16,7 @@ function JWTencode($jwt) {
 	
 	try {
 		
-		$decoded = JWT::decode ( $jwt, $pubKey, array (
-				'RS256' 
-		) );
+		$decoded = JWT::decode ( $jwt, $pubKey, array ( 'RS256' ));
 		
 	} catch ( Exception $e ) {
 		
@@ -27,7 +25,14 @@ function JWTencode($jwt) {
 		return false;
 	}
 	
-	print_r ( base64_encode(file_get_contents(RESOURCES."/malamuty.jpg")));
+	//show appropriate resource claimed in JWT token
+	if($decoded -> res == 'doggies'){
+	print_r ( base64_encode(file_get_contents(RESOURCES."/malamutes.jpg")));
+	}
+	
+	if($decoded -> res == 'kittens'){
+		print_r ( base64_encode(file_get_contents(RESOURCES."/kittens.jpg")));
+	}
 }
 
 JWTencode ( $jwt );
