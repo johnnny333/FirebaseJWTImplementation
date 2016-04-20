@@ -1,12 +1,20 @@
+/*
+ * Copyright (c) 2016. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
 // create single HTML elements and use them within showImage()
-var img = document.createElement("img"), 
+var img = document.createElement("img"),
 	span = document.createElement("span"),
-	timerSpan = document.createElement("span");
+	timerSpan = document.createElement("span"),
+    timerInterval;
 
 /**
  * Prepare variables for ajaxRequest()
- * 
- * @param string requestType
+ * @param  requestType
  * @returns void
  * @author jzarewicz
  */
@@ -38,11 +46,9 @@ function prepareRequest(requestType) {
 }
 /**
  * Execute Ajax request with given arguments from prepareRequest() and handle
- * responses accordigly
- * 
- * @param string script
- * @param number reqNmbr
- * @param string vars
+ * responses accordingly
+ * @param {String} script
+ * @param {String} vars
  */
 function ajaxRequest(script, vars) {
 	// Create our XMLHttpRequest object
@@ -63,10 +69,12 @@ function ajaxRequest(script, vars) {
 				var responseJSON = JSON.parse(hr.responseText);
 
 				// Save encoded token to the local storage
-				localStorage.setItem("jwt", responseJSON.encoded['jwt'])
+				localStorage.setItem("jwt", responseJSON.encoded['jwt']);
 
+                //clear previous timer
+                clearInterval(timerInterval);
 				// Get token exp and pass it to timer()
-				 timer(responseJSON.decoded['exp']);
+                timer(responseJSON.decoded['exp']);
 
 				// Put encoded JWT to the appropriate div
 				document.getElementsByTagName('textarea')[0].innerHTML = responseJSON.encoded['jwt'];
@@ -79,7 +87,7 @@ function ajaxRequest(script, vars) {
 			}
 		}
 	}
-	// Send the data to PHP
+	// Send the data to PHP script
 	hr.send(vars);
 }
 
@@ -94,31 +102,29 @@ function showImage(resource) {
 }
 /**
  * Countdown token life in seconds
- * @param number expTime
+ * @param {number} expTime
  */
 function timer(expTime) {
 	
 	console.log("timerSpan " + timerSpan);
-	console.log("timerSpan " + typeof timerSpan)
+	console.log("timerSpan " + typeof timerSpan);
 
-	var timerInterval = setInterval(function() {
+	    timerInterval = setInterval(function() {
 		var currentTime = new Date().getTime() / 1000;
-//		console.log((expTime - currentTime).toFixed()) // changes type from number to string :/
 		timerSpan.innerHTML = (expTime - currentTime).toFixed();
 		document.body.appendChild(timerSpan);
 
 		// Stop the timer when 0 is reached
 		if ((expTime - currentTime).toFixed() <= 0) {
-			clearInterval(timerInterval)
+			clearInterval(timerInterval);
 			timerSpan.parentNode.removeChild(timerSpan);
 		}
 	}, 1000);
 }
 /**
  * Check for errors in response and if so, display error msg from server
- * 
- * @param string response
- * @returns {Boolean}
+ * @param {string} response
+ * @returns {boolean}
  */
 function checkForErrorInResponse(response) {
 
