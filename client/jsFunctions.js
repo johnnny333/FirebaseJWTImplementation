@@ -1,15 +1,8 @@
-/*
- * Copyright (c) 2016. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
- */
-
 // create single HTML elements and use them within showImage()
-var img = document.createElement("img"),
+var rsrImg = document.getElementsByClassName("img-responsive")[0],
 	span = document.createElement("span"),
 	timerSpan = document.createElement("span"),
+
     timerInterval;
 
 /**
@@ -86,19 +79,19 @@ function ajaxRequest(script, vars) {
 				showImage(hr.responseText)
 			}
 		}
-	}
+	};
 	// Send the data to PHP script
 	hr.send(vars);
 }
 
 function showImage(resource) {
+    console.log("img"+ rsrImg);
 
 	// reset HTML elements with every call to function
-	img.setAttribute('src', '');
+	rsrImg.setAttribute("src", '');
 
 	var src = "data:image;base64," + resource;
-	img.setAttribute('src', src)
-	document.body.appendChild(img);
+	rsrImg.setAttribute('src', src);
 }
 /**
  * Countdown token life in seconds

@@ -1,37 +1,90 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<script type="text/javascript" src="client/jsFunctions.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FirebaseJWTImplementation</title>
+    <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="client/jsFunctions.js"></script>
 </head>
 <body>
+<div class="container ">
 
-	<!-- Form to specify JWT payload -->
-	Issuer:
-	<br>
-	<input type="text" name="issuer" value="issuer">
-	<br> Auditorium:
-	<br>
-	<input type="text" name="auditorium" value="auditorium">
-	<br> Resource:
-	<br>
-	<select name="resource">
-		<option value="doggies">Doggies</option>
-		<option value="kittens">Kittens</option>
-	</select>
-	<br> Token Time:
-	<br>
-	<input type="number" name="exp" min="1" max="5" value="1">Minute(s)
-	<br>
-	<br>
-	<input type="button" value='Get JWT Token' onclick="prepareRequest('jwtRequest')">
+    <div class="page-header ">
+        <h1>FirebaseJWTImplementation</h1>
+        <p>Resize this responsive page to see the effect!</p>
+    </div>
 
-	<!-- TextArea to display encoded JWT -->
-	<textarea rows="10" cols="60"></textarea>
-
-	<!-- TextArea to display decoded JWT -->
-	<textarea rows="10" cols="60"></textarea>
-
-	<input type="button" value='Show Resource' onclick="prepareRequest('resource')">
-
+    <!--Row with form to specify JWT token - 2 columns-->
+    <div class="row">
+        <!-- Form to specify JWT payload, divided into two columns -->
+        <form role="form">
+            <!--First column-->
+            <div class="col-sm-6">
+                <!--Issuer-->
+                <div class="form-group">
+                    <label for="issuer">Issuer:</label>
+                    <input type="email" class="form-control" name="issuer" id="issuer" placeholder="issuer">
+                </div>
+                <!--Auditorium-->
+                <div class="form-group">
+                    <label for="auditorium">Auditorium:</label>
+                    <input type="text" class="form-control" name="auditorium" id="auditorium" placeholder="auditorium">
+                </div>
+            </div>
+            <!--Second column-->
+            <div class="col-sm-6">
+                <!--Resource select-->
+                <div class="form-group">
+                    <label for="resSelect">Resource:</label>
+                    <select class="form-control" name="resource" id="resSelect">
+                        <option value="doggies">Doggies</option>
+                        <option value="kittens">Kittens</option>
+                    </select>
+                </div>
+                <!--Token time-->
+                <div class="form-group">
+                    <label for="exp">Token Time: <em>(In Minute(s))</em></label>
+                    <input type="number" class="form-control" name="exp" id="exp" min="1" max="5" value="1">
+                </div>
+            </div>
+    </div>
+    <!--Row for buttons-->
+    <div class="row text-center">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <input type="button" class="btn btn-default" value='Get JWT Token'
+                       onclick="prepareRequest('jwtRequest')">
+                <input type="button" class="btn btn-default" value='Show Resource' onclick="prepareRequest('resource')">
+            </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <!--Row for Textareas-->
+    <div class="row">
+        <div class="col-sm-6">
+            <!-- TextArea to display encoded JWT -->
+            <div class="form-group">
+            <textarea class="form-control" placeholder="Encoded JWT" rows="10" cols="60"></textarea>
+                </div>
+        </div>
+        <div class="col-sm-6">
+            <!-- TextArea to display decoded JWT -->
+            <div class="form-group">
+            <textarea class="form-control" placeholder="Decoded JWT" rows="10" cols="60"></textarea>
+                </div>
+        </div>
+    </div>
+    <!--Row for resources-->
+    <div class="row text-center">
+        <div class="col-sm-12">
+            <!-- rsrImg to display resource -->
+            <img class="img-responsive" src="" alt="Resource" width="auto" height="auto">
+        </div>
+    </div>
+</div>
 </body>
 </html>
 
