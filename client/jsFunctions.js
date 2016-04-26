@@ -99,12 +99,12 @@ function timer(expTime) {
 	    timerInterval = setInterval(function() {
 		var currentTime = new Date().getTime() / 1000,
 			timerSpan = document.getElementsByTagName('span')[1];
-		timerSpan.innerHTML = 'Token time: ' + (expTime - currentTime).toFixed() + ' seconds';
+		timerSpan.innerHTML = 'Token time: ' + (expTime - currentTime).toFixed() + ' seconds;';
 
 		// Stop the timer when 0 is reached
 		if ((expTime - currentTime).toFixed() <= 0) {
 			clearInterval(timerInterval);
-			timerSpan.parentNode.removeChild(timerSpan);
+			timerSpan.innerHTML = '';
 		}
 	}, 1000);
 }
