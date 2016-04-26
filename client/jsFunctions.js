@@ -1,6 +1,5 @@
 // create single HTML elements and use them within showImage()
-var timerSpan = document.createElement("span"),
-    timerInterval;
+var timerInterval;
 
 /**
  * Prepare variables for ajaxRequest()
@@ -98,9 +97,9 @@ function showImage(resource) {
 function timer(expTime) {
 
 	    timerInterval = setInterval(function() {
-		var currentTime = new Date().getTime() / 1000;
-		timerSpan.innerHTML = (expTime - currentTime).toFixed();
-		document.body.appendChild(timerSpan);
+		var currentTime = new Date().getTime() / 1000,
+			timerSpan = document.getElementsByTagName('span')[1];
+		timerSpan.innerHTML = 'Token time: ' + (expTime - currentTime).toFixed() + ' seconds';
 
 		// Stop the timer when 0 is reached
 		if ((expTime - currentTime).toFixed() <= 0) {

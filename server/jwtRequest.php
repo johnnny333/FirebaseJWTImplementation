@@ -20,9 +20,15 @@ function JWTencode($iss, $aud, $exp = 5, $res) {
 	
 	// RS256 ASSYMETRIC
 	// private key
-	$privKey = file_get_contents ( KEYS . '/privkey.pem' );
+	if(!$privKey = file_get_contents ( KEYS . '/privkey.pem' )){
+		echo 'Error: No private key found,did you generate it?';
+		return;
+	}
 	// public key
-	$pubKey = file_get_contents ( KEYS . '/pubkey.pem' );
+	if(!$pubKey = file_get_contents ( KEYS . '/pubkey.pem' )){
+		echo 'Error: No public key found,did you generate it?';
+		return;
+	}
 	
 	// HS256 SYMETRIC (HMAC-SHA256)
 	// $key = "example_key";
@@ -53,7 +59,7 @@ function JWTencode($iss, $aud, $exp = 5, $res) {
 				'RS256' 
 		) );
 	} catch ( Exception $e ) {
-		print_r ( 'Error message: ' . $e->getMessage () );
+		print_r ( 'Error : ' . $e->getMessage () );
 	}
 	
 	// echo JSON formatted string with encoded and decoded token;

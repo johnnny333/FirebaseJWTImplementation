@@ -20,7 +20,7 @@ function JWTencode($jwt) {
 		
 	} catch ( Exception $e ) {
 		
-		print_r( 'Error message: '. $e->getMessage() );
+		print_r( 'Error : '. $e->getMessage() );
 		//Print error msg and break out of script
 		return false;
 	}
