@@ -1,8 +1,5 @@
 // create single HTML elements and use them within showImage()
-var rsrImg = document.getElementsByClassName("img-responsive")[0],
-	span = document.createElement("span"),
-	timerSpan = document.createElement("span"),
-
+var timerSpan = document.createElement("span"),
     timerInterval;
 
 /**
@@ -85,22 +82,20 @@ function ajaxRequest(script, vars) {
 }
 
 function showImage(resource) {
-    console.log("img"+ rsrImg);
+    var rsrImg = document.getElementsByTagName('img')[0];
 
 	// reset HTML elements with every call to function
 	rsrImg.setAttribute("src", '');
 
 	var src = "data:image;base64," + resource;
 	rsrImg.setAttribute('src', src);
+    rsrImg.style.visibility = "visible"
 }
 /**
  * Countdown token life in seconds
  * @param {number} expTime
  */
 function timer(expTime) {
-	
-	console.log("timerSpan " + timerSpan);
-	console.log("timerSpan " + typeof timerSpan);
 
 	    timerInterval = setInterval(function() {
 		var currentTime = new Date().getTime() / 1000;
@@ -121,11 +116,11 @@ function timer(expTime) {
  */
 function checkForErrorInResponse(response) {
 
+    var span = document.getElementsByTagName('span')[0];
 	span.innerHTML = '';
 
 	if (response.search("Error") != -1 || response.search("Unexpected") != -1) {
 		span.innerHTML = response;
-		document.body.appendChild(span);
 		return false
 	}
 }
