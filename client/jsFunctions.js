@@ -1,11 +1,11 @@
-// create single HTML elements and use them within showImage()
+// Global variable with setInterval
 var timerInterval;
 
 /**
  * Prepare variables for ajaxRequest()
- * @param  requestType
  * @returns void
  * @author jzarewicz
+ * @param {string} requestType
  */
 function prepareRequest(requestType) {
 
@@ -36,8 +36,8 @@ function prepareRequest(requestType) {
 /**
  * Execute Ajax request with given arguments from prepareRequest() and handle
  * responses accordingly
- * @param {String} script
- * @param {String} vars
+ * @param {string} script
+ * @param {string} vars
  */
 function ajaxRequest(script, vars) {
 	// Create our XMLHttpRequest object
@@ -79,7 +79,10 @@ function ajaxRequest(script, vars) {
 	// Send the data to PHP script
 	hr.send(vars);
 }
-
+/**
+ *Displays and hides images send over in base64
+ * @param {string} resource
+ */
 function showImage(resource) {
     var rsrImg = document.getElementsByTagName('img')[0];
 
@@ -109,7 +112,7 @@ function timer(expTime) {
 	}, 1000);
 }
 /**
- * Check for errors in response and if so, display error msg from server
+ * Check for errors in AJAX response and if so, display error msg sent from server
  * @param {string} response
  * @returns {boolean}
  */
