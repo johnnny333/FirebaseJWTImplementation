@@ -62,12 +62,10 @@ function JWTencode($iss, $aud, $exp = 5, $res) {
 		print_r ( 'Error : ' . $e->getMessage () );
 	}
 	
-	// echo JSON formatted string with encoded and decoded token;
-	echo "{\"encoded\":{ \"jwt\": \"";
-	print_r ( $encoded );
-	echo "\" }, \"decoded\": ";
-	echo json_encode ( $decoded );
-	echo "}";
+	// 	Prepare JSON to echo 
+	$jsonArray['encoded'] = $encoded;
+	$jsonArray['decoded'] = $decoded;
+	echo json_encode ( $jsonArray );
 }
 
 JWTencode ( $iss, $aud, $exp, $res );

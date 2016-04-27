@@ -18,15 +18,15 @@ function prepareRequest(requestType) {
 			exp = document.getElementsByName("exp")[0].value.trim(),
 			res = document.getElementsByName("resource")[0].value.trim(),
 			
-		script = 'server/jwtRequest.php', 
-		vars = "iss=" + iss + "&aud=" + aud + "&exp=" + exp + "&res=" + res;
+			script = 'server/jwtRequest.php', 
+			vars = "iss=" + iss + "&aud=" + aud + "&exp=" + exp + "&res=" + res;
 		
 		break;
 
 	case 'resource':
 
 		var script = 'server/resource.php',  
-		vars = "jwt=" + localStorage.getItem("jwt");
+			vars = "jwt=" + localStorage.getItem("jwt");
 
 		break;
 
@@ -43,8 +43,7 @@ function ajaxRequest(script, vars) {
 	// Create our XMLHttpRequest object
 	var hr = new XMLHttpRequest();
 	hr.open("POST", script, true);
-	// Set content type header information for sending url encoded variables in
-	// the request
+	// Set content type header information for sending url encoded variables in the request
 	hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	// Access the onreadystatechange event for the XMLHttpRequest object
 	hr.onreadystatechange = function() {
@@ -58,7 +57,7 @@ function ajaxRequest(script, vars) {
 				var responseJSON = JSON.parse(hr.responseText);
 
 				// Save encoded token to the local storage
-				localStorage.setItem("jwt", responseJSON.encoded['jwt']);
+				localStorage.setItem("jwt", responseJSON.encoded);
 
                 //clear previous timer
                 clearInterval(timerInterval);
@@ -66,7 +65,7 @@ function ajaxRequest(script, vars) {
                 timer(responseJSON.decoded['exp']);
 
 				// Put encoded JWT to the appropriate div
-				document.getElementsByTagName('textarea')[0].innerHTML = responseJSON.encoded['jwt'];
+				document.getElementsByTagName('textarea')[0].innerHTML = responseJSON.encoded;
 				// Put decoded JWT to the apropriate div and format in nicely
 				document.getElementsByTagName('textarea')[1].innerHTML = JSON.stringify(responseJSON.decoded, undefined, 4);
 			}
